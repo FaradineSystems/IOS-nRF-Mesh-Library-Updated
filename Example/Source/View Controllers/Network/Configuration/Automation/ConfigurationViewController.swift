@@ -60,6 +60,7 @@ class ConfigurationViewController: UIViewController,
             }
             
             // Roll back and retry the failed task.
+            progress.retryLast()
             current -= 1
             executeNext()
         } else if isDfu {
@@ -716,6 +717,7 @@ private extension ConfigurationViewController {
     
     func failed() {
         DispatchQueue.main.async {
+            self.progress.addFail()
             self.tableView.reloadData()
             self.statusView.text = "Configuration failed"
             self.doneButton.title = "Retry"
