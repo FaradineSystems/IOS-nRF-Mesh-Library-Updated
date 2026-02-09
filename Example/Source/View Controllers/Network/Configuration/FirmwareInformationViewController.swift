@@ -316,7 +316,7 @@ private extension FirmwareInformationViewController {
         let message = FirmwareUpdateFirmwareMetadataCheck(imageIndex: index, metadata: metadata)
         
         start("Checking metadata...") { [model] in
-            return try! MeshNetworkManager.instance.send(message, to: model!) { [weak self] result in
+            return try MeshNetworkManager.instance.send(message, to: model!) { [weak self] result in
                 self?.done { [weak self] in
                     do {
                         let status = try result.get() as! FirmwareUpdateFirmwareMetadataStatus
