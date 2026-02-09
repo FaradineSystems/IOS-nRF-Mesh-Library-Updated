@@ -513,7 +513,7 @@ class ConfigurationViewController: UIViewController,
         navigationItem.rightBarButtonItem?.isEnabled = operations.isEmpty
         navigationItem.leftBarButtonItem?.isEnabled = !operations.isEmpty
         progress.isHidden = operations.isEmpty
-        progress.setMax(operations.count)
+        progress.setMax(operations.reduce(0) { $0 + $1.tasks.count })
         time.isHidden = operations.isEmpty
         remainingTime.isHidden = operations.isEmpty
         
