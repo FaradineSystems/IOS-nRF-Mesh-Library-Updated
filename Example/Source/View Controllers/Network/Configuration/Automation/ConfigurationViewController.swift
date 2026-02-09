@@ -50,7 +50,7 @@ class ConfigurationViewController: UIViewController,
         if inProgress {
             // Restore the original text and state.
             doneButton.title = "Done"
-            navigationItem.leftBarButtonItem?.isEnabled = false
+            navigationItem.rightBarButtonItem?.isEnabled = false
             remainingTime.isHidden = false
             
             // Make sure any GATT Proxy is connected by turning ON
