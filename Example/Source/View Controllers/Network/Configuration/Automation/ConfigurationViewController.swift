@@ -45,7 +45,24 @@ class ConfigurationViewController: UIViewController,
     @IBOutlet weak var time: UILabel!
     @IBOutlet weak var doneButton: UIBarButtonItem!
     @IBAction func doneTapped(_ sender: UIBarButtonItem) {
-        if isDfu {
+        // ifProgress is true, the configuration is still in progress but one step failed.
+        // The button says "Retry".
+        if inProgress {
+            // Restore the original text and state.
+            doneButton.title = "Done"
+            navigationItem.leftBarButtonItem?.isEnabled = false
+            remainingTime.isHidden = false
+            
+            // Make sure any GATT Proxy is connected by turning ON
+            // automatic connection if there's no GATT Proxy connection.
+            if let bearer = MeshNetworkManager.bearer, !bearer.isOpen {
+                bearer.isConnectionModeAutomatic = true
+            }
+            
+            // Roll back and retry the failed task.
+            current -= 1
+            executeNext()
+        } else if isDfu {
             performSegue(withIdentifier: "start", sender: nil)
         } else {
             navigationController?.dismiss(animated: true)
@@ -697,6 +714,17 @@ private extension ConfigurationViewController {
         }
     }
     
+    func failed() {
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+            self.statusView.text = "Configuration failed"
+            self.doneButton.title = "Retry"
+            self.navigationItem.rightBarButtonItem?.isEnabled = true
+            self.navigationItem.leftBarButtonItem?.isEnabled = true // Allow Cancel
+            self.remainingTime.isHidden = true
+        }
+    }
+    
 }
 
 extension ConfigurationViewController: MeshNetworkDelegate {
@@ -728,9 +756,11 @@ extension ConfigurationViewController: MeshNetworkDelegate {
                             from localElement: Element,
                             to destination: MeshAddress,
                             error: Error) {
-        inProgress = false
+        // Don't allow Swipe to cancel, instead enable X to cancel (in failed()).
+        // inProgress = false
+        handler = nil
         reload(taskAt: current, with: .failed(error))
-        completed()
+        failed()
     }
     
 }
