@@ -46,6 +46,7 @@ class SettingsViewController: UITableViewController {
     @IBOutlet weak var lastModifiedLabel: UILabel!
     @IBOutlet weak var resetNetworkButton: UIButton!
     @IBOutlet weak var quickProvisionSwitch: UISwitch!
+    @IBOutlet weak var alwaysReconfigure: UISwitch!
     @IBOutlet weak var appVersionLabel: UILabel!
     @IBOutlet weak var appBuildNumberLabel: UILabel!
     
@@ -61,6 +62,10 @@ class SettingsViewController: UITableViewController {
     
     @IBAction func quickProvisioningDidChange(_ sender: UISwitch) {
         UserDefaults.standard.set(sender.isOn, forKey: "quickProvisioning")
+    }
+    
+    @IBAction func alwaysReconfigureDidChange(_ sender: UISwitch) {
+        UserDefaults.standard.set(sender.isOn, forKey: "alwaysReconfigure")
     }
     
     // MARK: - Private members
@@ -81,6 +86,7 @@ class SettingsViewController: UITableViewController {
         
         // Load developer settings.
         quickProvisionSwitch.isOn = UserDefaults.standard.bool(forKey: "quickProvisioning")
+        alwaysReconfigure.isOn = UserDefaults.standard.bool(forKey: "alwaysReconfigure")
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -153,9 +159,18 @@ class SettingsViewController: UITableViewController {
         }
         if indexPath.isQuickProvisioning {
             presentAlert(title: "Info",
-                         message: "Quick Provisioning allows to provision devices with default settings:\n"
-                                + "- Primary Network Key,\n- First available Unicast Address,\n- No OOB.\n\n"
-                                + "This is useful for testing purposes, but should not be used in production environment.")
+                         message: "Quick Provisioning skips provisioning configuration and automatically "
+                                + "uses default settings (primary network key, first available unicast address, no OOB).\n\n"
+                                + "For testing purposes only.")
+                                    
+        }
+        if indexPath.isAlwaysReconfigure {
+            presentAlert(title: "Info",
+                         message: "When enabled, the app automatically reprovisions and reconfigures "
+                                + "devices if nodes with the same UUID already exist in the network.\n\n"
+                                + "The devices will be assigned a new unicast address. Any nodes configured "
+                                + "to publish to the old unicast addresses will be reconfigured.\n\n"
+                                + "This is intended for recreating the network from a saved configuration.")
                                     
         }
     }
@@ -389,6 +404,8 @@ private extension SettingsViewController {
     func resetDeveloperSettings() {
         UserDefaults.standard.set(false, forKey: "quickProvisioning")
         quickProvisionSwitch.isOn = false
+        UserDefaults.standard.set(false, forKey: "alwaysReconfigure")
+        alwaysReconfigure.isOn = false
     }
 }
 
@@ -518,6 +535,11 @@ private extension IndexPath {
         return section == IndexPath.developerSection && row == 0
     }
     
+    /// Returns whether the IndexPath points to the Always Reconfigure switch row.
+    var isAlwaysReconfigure: Bool {
+        return section == IndexPath.developerSection && row == 1
+    }
+    
     /// Returns whether the IndexPath points to the Source Code link.
     var isLinkToGitHub: Bool {
         return section == IndexPath.aboutSection && row == 2
@@ -544,3 +566,4 @@ private extension Array where Element == CodingKey {
     }
     
 }
+
