@@ -401,11 +401,14 @@ private extension SettingsViewController {
         }
     }
     
+    /// Clears the Developer Settings to default values.
     func resetDeveloperSettings() {
-        UserDefaults.standard.set(false, forKey: "quickProvisioning")
-        quickProvisionSwitch.isOn = false
-        UserDefaults.standard.set(false, forKey: "alwaysReconfigure")
-        alwaysReconfigure.isOn = false
+        DispatchQueue.main.async { [weak self] in
+            UserDefaults.standard.set(false, forKey: "quickProvisioning")
+            self?.quickProvisionSwitch.isOn = false
+            UserDefaults.standard.set(false, forKey: "alwaysReconfigure")
+            self?.alwaysReconfigure.isOn = false
+        }
     }
 }
 
