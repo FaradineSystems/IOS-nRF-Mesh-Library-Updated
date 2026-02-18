@@ -15,7 +15,7 @@ Pod::Spec.new do |s|
   s.osx.deployment_target  = '10.15'  
   s.static_framework = true
   s.swift_versions   = ['5.5', '5.6', '5.7', '5.8', '5.9']
-  s.source_files = ['Library/**/*.swift', 'Library/Documentation.docc/*.md']
+  s.source_files = ['Library/**/*', 'Library/Documentation.docc/*.md']
   s.resource_bundles = {
      'PrivacyInfo' => ['Library/Resources/PrivacyInfo.xcprivacy']
   }

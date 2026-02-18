@@ -31,11 +31,11 @@
 
 import Foundation
 
-public struct MagicLevelGet: AcknowledgedGenericMessage, TransactionMessage {
+public struct MagicLevelGet: StaticAcknowledgedMeshMessage, TransactionMessage {
     /// The transaction id
     public var tid: UInt8!
     public static let opCode: UInt32 = 0x8224
-    public static let responseType: StaticMeshMessage.Type = MagicLevelGetStatus.self
+    public static let responseType: StaticMeshResponse.Type = MagicLevelGetStatus.self
     
     public var parameters: Data? {
         return Data() + mIO + mIndex + mCorrelation + tid

@@ -31,11 +31,11 @@
 
 import Foundation
 
-public struct DoozEpochSet: AcknowledgedGenericMessage, TransactionMessage {
+public struct DoozEpochSet: StaticAcknowledgedMeshMessage, TransactionMessage {
     /// The transaction id
     public var tid: UInt8!
     public static let opCode: UInt32 = 0x8220
-    public static let responseType: StaticMeshMessage.Type = DoozEpochStatus.self
+    public static let responseType: StaticMeshResponse.Type = DoozEpochStatus.self
 
     public var parameters: Data? {
         var data = Data() + tid

@@ -31,7 +31,7 @@
 
 import Foundation
 
-public struct MagicLevelGetStatus: GenericMessage {
+public struct MagicLevelGetStatus: StaticMeshMessage {
     public static var opCode: UInt32 = 0x8226
     
     public var parameters: Data? {
