@@ -31,7 +31,7 @@
 
 import Foundation
 
-public struct DoozEpochStatus: StaticMeshMessage {
+public struct DoozEpochStatus: StaticMeshResponse {
     public static var opCode: UInt32 = 0x8222
 
     public var parameters: Data? {

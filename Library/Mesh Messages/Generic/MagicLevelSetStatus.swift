@@ -31,7 +31,7 @@
 
 import Foundation
 
-public struct MagicLevelSetStatus: StaticMeshMessage {
+public struct MagicLevelSetStatus: StaticMeshResponse {
     public static var opCode: UInt32 = 0x8225
     
     public var parameters: Data? {
