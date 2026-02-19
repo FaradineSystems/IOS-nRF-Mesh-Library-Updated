@@ -8,7 +8,7 @@ let package = Package(
     .iOS(.v13)
   ],
   products: [
-    .library(name: "NordicMesh", targets: ["NordicMesh"])
+    .library(name: "NordicMesh", targets: ["nRFMeshProvision"])
   ],
   dependencies: [
     .package(
@@ -19,7 +19,7 @@ let package = Package(
   ],
   targets: [
     .target(
-      name: "NordicMesh",
+      name: "nRFMeshProvision",
       dependencies: ["CryptoSwift"],
       path: "Library/",
       resources: [
@@ -28,7 +28,7 @@ let package = Package(
     ),
     .testTarget(
       name: "NordicMeshTests",
-      dependencies: ["NordicMesh"],
+      dependencies: ["nRFMeshProvision"],
       path: "Example/Tests",
       exclude: ["Info.plist"]
     )
