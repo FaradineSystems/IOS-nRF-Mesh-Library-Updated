@@ -1,7 +1,9 @@
 // Created by Joseph Lindemuth
 import Foundation
 
-public struct VendorModelStatus: StaticMeshResponse {
+public struct VendorModelStatus: MeshResponse {
+    
+
     // public static let opCode: UInt32 = 0xC35900 // TODO
     public var opCode: UInt32 {
         return self.myOpCode
@@ -17,5 +19,10 @@ public struct VendorModelStatus: StaticMeshResponse {
         self.myParameters = parameters
         self.myOpCode = opCode;
         // print("Opcode is \(self.myOpCode)")
+    }
+
+    public init?(parameters: Data) {
+        print("Should never reach here")
+        return nil
     }
 }
