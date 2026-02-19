@@ -25,10 +25,10 @@ public struct VendorModelMessage: StaticAcknowledgedMeshMessage, TransactionMess
         print("New Opcode is \(VendorModelMessage.opCode), modelId was \(modelId), companyIdentifier was \(companyIdentifier)")
     }
 
-    // public init?(parameters: Data) {
-    //     self.myParameters = parameters
-    //     // self.myOpCode = 0xC359000B
-    //     print("Default init called with no opcode or other info. This should NOT happen")
-    // }
+    public init?(parameters: Data) {
+        self.myParameters = parameters
+        // self.myOpCode = 0xC359000B
+        print("Default init called with no opcode or other info. This should NOT happen")
+    }
     
 }
