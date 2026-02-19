@@ -248,7 +248,7 @@ class HealthServerHandler: ModelDelegate {
     
     func model(_ model: Model, didReceiveResponse response: any MeshResponse,
                toAcknowledgedMessage request: any AcknowledgedMeshMessage,
-               from source: NordicMesh.Address) {
+               from source: nRFMeshProvision.Address) {
         // Ignore. There are no CDB fields matching these parameters.
     }
 }
