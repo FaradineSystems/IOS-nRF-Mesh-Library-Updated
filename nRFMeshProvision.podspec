@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = 'nRFMeshProvision'
-  s.module_name      = 'NordicMesh'
+  s.module_name      = 'nRFMeshProvision'
   s.version          = '4.7.0'
   s.summary          = 'A Bluetooth Mesh library'
   s.description      = <<-DESC
