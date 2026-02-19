@@ -14,7 +14,7 @@ public struct VendorModelMessage: AcknowledgedMeshMessage, TransactionMessage {
     public let companyIdentifier: Int
     
     // Custom init
-    public init(opCode: UInt32, modelId: Int, companyIdentifier: Int, myParameters: Data) {
+    public init(withOpCode opCode: UInt32, modelId: Int, companyIdentifier: Int, myParameters: Data) {
         self.myParameters = myParameters
         self.opCode = opCode
         self.modelId = modelId
@@ -23,6 +23,7 @@ public struct VendorModelMessage: AcknowledgedMeshMessage, TransactionMessage {
     }
     
     // Required protocol init
+    @_disfavoredOverload
     public init?(parameters: Data) {
         print("Should not reach here")
         return nil  // Not used for creating messages
