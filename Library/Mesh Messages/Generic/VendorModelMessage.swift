@@ -14,7 +14,7 @@ public struct VendorModelMessage: AcknowledgedMeshMessage, TransactionMessage {
     public let companyIdentifier: Int
     
     // Custom init
-    public init(parameters: Data, opCode: UInt32, modelId: Int, companyIdentifier: Int) {
+    public init(opCode: UInt32, modelId: Int, companyIdentifier: Int, parameters: Data) {
         self.myParameters = parameters
         self.opCode = opCode
         self.modelId = modelId
@@ -24,6 +24,7 @@ public struct VendorModelMessage: AcknowledgedMeshMessage, TransactionMessage {
     
     // Required protocol init
     public init?(parameters: Data) {
+        print("Should not reach here")
         return nil  // Not used for creating messages
     }
 }
