@@ -14,8 +14,8 @@ public struct VendorModelMessage: AcknowledgedMeshMessage, TransactionMessage {
     public let companyIdentifier: Int
     
     // Custom init
-    public init(opCode: UInt32, modelId: Int, companyIdentifier: Int, parameters: Data) {
-        self.myParameters = parameters
+    public init(opCode: UInt32, modelId: Int, companyIdentifier: Int, myParameters: Data) {
+        self.myParameters = myParameters
         self.opCode = opCode
         self.modelId = modelId
         self.companyIdentifier = companyIdentifier
