@@ -2,7 +2,10 @@
 import Foundation
 
 public struct VendorModelMessage: StaticAcknowledgedMeshMessage, TransactionMessage {
-    public static let opCode: UInt32 = 0xC35900 // TODO
+    // public static let opCode: UInt32 = 0xC359000B // TODO
+    public var opCode: UInt32 {
+        return self.myOpCode
+    }
     public static let responseType: StaticMeshResponse.Type = VendorModelStatus.self
     
     public var tid: UInt8! // TODO
@@ -11,10 +14,13 @@ public struct VendorModelMessage: StaticAcknowledgedMeshMessage, TransactionMess
     }
     
     public let myParameters: Data
+    public let myOpCode: UInt32
     
     
-    public init(parameters: Data) {
+    public init(parameters: Data, opCode: UInt32, modelId: Int, companyIdentifier: Int) {
         self.myParameters = parameters
+        self.myOpCode = opCode;
+        print("Opcode is \(self.myOpCode)")
     }
     
 }
