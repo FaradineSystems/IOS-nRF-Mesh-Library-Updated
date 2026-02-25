@@ -139,8 +139,9 @@ public struct ModelData: Sendable, CustomDebugStringConvertible {
     public let modelId: UInt32
     
     /// Bluetooth SIG or vendor-assigned model identifier.
-    public var modelIdentifier: UInt16 {
-        return UInt16(modelId & 0x0000FFFF)
+    public var modelIdentifier: UInt32 {
+        // return UInt16(modelId & 0x0000FFFF)
+        return modelId 
     }
     /// The Company Identifier or `nil`, if the model is Bluetooth SIG-assigned.
     public var companyIdentifier: UInt16? {
